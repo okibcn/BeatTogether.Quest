@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Quest",
+            "defines": [
+                "ID=\"BeatTogether\"",
+                "VERSION=\"1.2.0\"",
+                "__GNUC__",
+                "__aarch64__",
+                "HOST_NAME=\"master.beattogether.systems\"",
+                "PORT=2328",
+                "STATUS_URL=\"http://master.beattogether.systems/status\""
+            ],
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/extern/**",
+                "${workspaceFolder}/extern/libil2cpp/il2cpp/libil2cpp",
+                "C:/Users/omartin/Desktop/Code/android-ndk-r23",
+                "C:/Users/omartin/Desktop/Code/android-ndk-r23/toolchains/llvm/prebuilt/windows-x86_64/lib64/clang/12.0.5/include",
+                "C:/Users/omartin/Desktop/Code/android-ndk-r23/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include",
+                "C:/Users/omartin/Desktop/Code/android-ndk-r23/sources/cxx-stl/llvm-libc++/include",
+                "C:/Users/omartin/Desktop/Code/android-ndk-r23/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
