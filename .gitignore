@@ -59,3 +59,7 @@ Android.mk.backup
 
 TestBuild.ps1
 TestQMOD.ps1
+
+# Private stuff
+BeatTogether.json
+*.qmod

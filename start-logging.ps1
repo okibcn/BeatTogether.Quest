@@ -8,13 +8,13 @@ while ([string]::IsNullOrEmpty($bspid)) {
 }
 if ($args.Count -eq 0) {
     echo "Start logging!"
-    adb logcat -T "$timestamp" --pid $bspid | Select-String -pattern "(BeatTogether|multiquestensions)" 
+    adb logcat -T "$timestamp" --pid $bspid | Select-String -pattern "ogether" 
 }
 if ($args[0] -eq "--file") {
     echo "Logging and saving to file!"
-    (adb logcat -T "$timestamp" --pid $bspid | Select-String -pattern "(QuestHook|modloader|AndroidRuntime)") | Tee-Object -FilePath $PSScriptRoot/logcat.log 
+    (adb logcat -T "$timestamp" --pid $bspid | Select-String -pattern "(QuestHook|modloader|AndroidRuntime)") | Out-File $PSScriptRoot/logcat.log -Append
 }
-if ($args[0] -eq "--log") {
+if ($args[0] -eq "--verbose") {
     echo "Logging and saving to file!"
     adb logcat -T "$timestamp" --pid $bspid > $PSScriptRoot/logcat.log 
 }

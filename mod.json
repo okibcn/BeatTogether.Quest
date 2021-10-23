@@ -1,19 +1,24 @@
-
 {
     "_QPVersion": "0.1.1",
     "name": "Beat Together",
     "id": "BeatTogether",
     "author": "BeatTogether Team, ported to v1.17.1 by Mioki",
-    "version": "1.3.0-unofficial",
+    "version": "1.3.1-unofficial",
     "packageId": "com.beatgames.beatsaber",
     "packageVersion": "1.17.1",
-	"description": "Access to a multiplayer private server for the modding community. Supports crossplay between PC and Quest. Now ported to Beat Saber Quest v1.17.1",
-	"coverImage": "Cover.png",
+    "description": "Access to a multiplayer private server for the modding community. Supports crossplay between PC and Quest. Now ported to Beat Saber Quest v1.17.1",
+    "coverImage": "Cover.jpg",
     "type": "Gameplay",
     "modFiles": [
         "libbeattogether.so"
     ],
     "libraryFiles": [
         "libbeatsaber-hook_2_3_0.so"
+    ],
+    "fileCopies": [
+        {
+            "name": "BeatTogether.json",
+            "destination": "/sdcard/ModData/com.beatgames.beatsaber/Configs/BeatTogether.json"
+        }
     ]
 }

@@ -1,3 +1,15 @@
+# BeatTogether for v1.17.1
+
+This is a version I forked from the original project development. Differences from the latest official release other than being compatible with Beat Saber Quest v1.17.1:
+
+* Added username configuration, just in case you want to customize your username in Beat Together.
+* I have updated the configuration system to be compatible with the configuration system provided by the BeatSaber-Hook library. This allows:
+    * To configure the server address:port and the status address by editing the json config file in /sdcar/ModData/Configs folder.
+    * Username override can also be enabled and configured by editing the same json file.
+
+**I am not part of the Beat Together Team, responsible for the [original project development](https://github.com/pythonology/BeatTogether.Quest). Below, you can find the rest of the original readme information.**
+
+
 # BeatTogether
 A multiplayer private server for the modding community. Supports crossplay between PC and Quest. **This is the Quest Plugin.**
 
