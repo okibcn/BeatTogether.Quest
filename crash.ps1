@@ -5,6 +5,6 @@ if (-not ($PSVersionTable.PSEdition -eq "Core")) {
 }
 adb pull /sdcard/Android/data/com.beatgames.beatsaber/files/tombstone_00 $PSScriptRoot/tombstone_00
 Get-Content $PSScriptRoot/tombstone_00 | & $stackScript -sym ./obj/local/arm64-v8a/ > $PSScriptRoot"/CrashTemp.log"
-rm $PSScriptRoot/tombstone_00
+#rm $PSScriptRoot/tombstone_00
 mv .\CrashTemp.log ./lastCrash.log -Force
 Write "crash stack available as Crash.log"
