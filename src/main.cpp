@@ -32,6 +32,7 @@ Apocrypha version by Mioki
 #include "GlobalNamespace/MainSystemInit.hpp"
 #include "GlobalNamespace/NetworkConfigSO.hpp"
 #include "GlobalNamespace/UserCertificateValidator.hpp"
+#include "GlobalNamespace/QuickPlaySongPacksDropdown.hpp"
 using namespace GlobalNamespace;
 
 #include "System/Threading/Tasks/Task_1.hpp"
@@ -189,24 +190,33 @@ MAKE_HOOK_MATCH(UserCertificateValidator_ValidateCertificateChainInternal, &User
 // Change the "Online" menu text to "Beat Together"
 MAKE_HOOK_MATCH(MainMenuViewController_DidActivate, &MainMenuViewController::DidActivate, void, MainMenuViewController *self, bool firstActivation, bool addedToHierarchy, bool systemScreenEnabling)
 {
+    // Get pointer to button
     // Find the GameObject for the online button's text
-    static auto *searchPath = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>("MainContent/OnlineButton");
-    static auto *textProperty = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>("Text");
-    static auto *text = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>(BUTTON);
+    // static auto *searchPath = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>("MainContent/OnlineButton");
+    // static auto *textProperty = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>("Text");
+    // auto* sceneObject = self->get_gameObject();
+    // auto* buttonObject = sceneObject->get_transform()->Find(searchPath)->get_gameObject();
+    // auto* onlineButtonTextObj = buttonObject->get_transform()->Find(textProperty)->get_gameObject();
+    // TMPro::TextMeshProUGUI *onlineButtonText = onlineButtonTextObj->GetComponent<TMPro::TextMeshProUGUI *>();
+    static auto* searchPath = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>("MainContent/OnlineButton/Text");
+    TMPro::TextMeshProUGUI* onlineButtonText = self->get_gameObject()->get_transform()->Find(searchPath)->get_gameObject()->GetComponent<TMPro::TextMeshProUGUI*>();
 
-    auto* sceneObject = self->get_gameObject();
-    auto* buttonObject = sceneObject->get_transform()->Find(searchPath)->get_gameObject();
-    auto* onlineButtonTextObj = buttonObject->get_transform()->Find(textProperty)->get_gameObject();
-    TMPro::TextMeshProUGUI *onlineButtonText = onlineButtonTextObj->GetComponent<TMPro::TextMeshProUGUI *>();
-    logger().info("Replacing the Online butting text.");
+    logger().info("Replacing the Online button text.");
+    static auto *text = il2cpp_utils::newcsstr<il2cpp_utils::CreationType::Manual>(BUTTON);
     onlineButtonText->set_text(text);
 
     // Align the Text in the Center
-    logger().info("BUTTON: set centered.");
-    onlineButtonText->set_alignment(TMPro::TextAlignmentOptions::Center);
+    // logger().info("BUTTON: set centered.");
+    // onlineButtonText->set_alignment(TMPro::TextAlignmentOptions::Center);
 
     logger().info("BUTTON: Call original MainMenuViewController_DidActivate.");
     MainMenuViewController_DidActivate(self, firstActivation, addedToHierarchy, systemScreenEnabling);
+}
+
+// Disable QuickplaySongPacksOverrides if MQE is missing
+MAKE_HOOK_MATCH(QuickPlaySongPacksDropdown_LazyInit, &QuickPlaySongPacksDropdown::LazyInit, void, QuickPlaySongPacksDropdown* self) {
+    self->dyn__quickPlaySongPacksOverride() = nullptr;
+    QuickPlaySongPacksDropdown_LazyInit(self);
 }
 
 extern "C" void load()
@@ -219,7 +229,7 @@ extern "C" void load()
     INSTALL_HOOK(logger(), UserCertificateValidator_ValidateCertificateChainInternal);
     INSTALL_HOOK(logger(), MainMenuViewController_DidActivate);
     // Checks if MQE is installed
-    /*
+    
     auto ModList = Modloader::getMods();
     if (ModList.find("multiquestensions") != ModList.end())
     {
@@ -229,7 +239,8 @@ extern "C" void load()
     else
     {
         logger().info("MQE not found, CustomSongs will not work!");
+        INSTALL_HOOK(logger(), QuickPlaySongPacksDropdown_LazyInit);
     }
-    */
+    
     logger().info("Finished loading BeatTogether.");
 }
